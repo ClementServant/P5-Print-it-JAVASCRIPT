@@ -1,6 +1,7 @@
-/****** 
- * Ajout des variables pour la réalisation du carrousel.
-*/
+ /*******************
+* Ajout des variables pour la réalisation du carrousel.
+*/ 
+
 
 // Récuperation de la fléche de gauche avec querySelector =>  dse la class= ".arrow-left"
 let arrowLeft = document.querySelector(".arrow_left")
@@ -21,18 +22,25 @@ arrowRight.addEventListener("click", () => {
 })
 
 
+/*********** Ajout des bullet points sur la partie basse du slider
+ * 
+ * Ajout des bullets points depuis le script.js
+ * 
+ */
+
+let slider = document.querySelector(".dots")
+let dot = []
+
+for (let i = 0; i < 4; i++) {
+	let span = document.createElement("span")
+	span.classList.add("dot")
+	slider.appendChild(span)
+	dot.push(span)
+	dot[0].classList.add("dot_selected")
+}
 
 
-
-
-
-
-
-
-
-
-
-
+console.log(slider)
 
 /*const slides = [
 	{
@@ -51,5 +59,4 @@ arrowRight.addEventListener("click", () => {
 		"image":"slide4.png",
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
-]
-*/
+]*/
