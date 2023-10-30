@@ -1,11 +1,6 @@
- /**
-* *Ajout des variables pour la réalisation du carrousel.
-*/ 
-
-
 // !Récuperation de la fléche de gauche avec querySelector 
 
-const arrowLeft = document.querySelector(".arrow_left")
+/*const arrowLeft = document.querySelector(".arrow_left")
 console.log(arrowLeft)
 // *Ajout de l'eventListerner action au click sur l'icone de gauche
 arrowLeft.addEventListener("click", () => {
@@ -29,7 +24,6 @@ arrowLeft.addEventListener("click", () => {
 	 // Mettez à jour l'image et la ligne de balisage du slider
     texteDuSlider.innerHTML = slides[pointPrecedent].tagLine
 	
-	console.log(pointPrecedent)
 })
 
 // !Récuperation de la fléche de droite avec querySelector 
@@ -54,19 +48,14 @@ arrowRight.addEventListener("click", () => {
     
     const texteDuSlider = document.querySelector(".banner-tagLine")
     texteDuSlider.innerHTML = slides[pointSuivant].tagLine
-	
-	console.log(pointSuivant)
-})
+})*/
 
-
-/** 
- * 
- * *Ajout des bullet points sur la partie basse du slider
- * 
- * ?Ajout des bullets points depuis le script.js
- * 
+/**
+ * * Modification du code pour éviter les répétitions en ajoutant des fonctions
  */
 
+const flecheDeGauche = document.querySelector(".arrow_left")
+const flecheDeDroite = document.querySelector(".arrow_right")
 let slider = document.querySelector(".dots")
 let dot = []
 
@@ -78,12 +67,6 @@ for (let i = 0; i < 4; i++) {
 	dot.push(span)
 	dot[0].classList.add("dot_selected")
 }
-console.log(slider)
-
-/**
- * *Modification du slide au clic sur les fléches 
- * 
- */
 
 const slides = [
 	{
@@ -103,9 +86,50 @@ const slides = [
 		tagLine: "Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
-/**
- * *Ajout de la funtion d'affichage
- */
+
+// ! ajout function de se qui change
+
+function changerDeSlide(flecheSelectionner) {
+    const pointSelectionner = dot.findIndex(dot => dot.classList.contains("dot_selected"))
+    let nouvelleIndex
+
+    if (flecheSelectionner === "flecheDeGauche") {
+        nouvelleIndex = pointSelectionner - 1
+        if (nouvelleIndex < 0) {
+            nouvelleIndex = dot.length - 1
+        }
+    } else if (flecheSelectionner === "flecheDeDroite") {
+        nouvelleIndex = pointSelectionner + 1
+        if (nouvelleIndex === dot.length) {
+            nouvelleIndex = 0
+        }
+    }
+
+	// ! Se qui a en commun pour chaque fleches
+
+    dot[pointSelectionner].classList.remove("dot_selected")
+    dot[nouvelleIndex].classList.add("dot_selected")
+
+    const imageDuSlider = document.querySelector(".banner-img")
+    imageDuSlider.src = "./assets/images/slideshow/" + slides[nouvelleIndex].image
+
+    const texteDuSlider = document.querySelector(".banner-tagLine")
+    texteDuSlider.innerHTML = slides[nouvelleIndex].tagLine
+}
+
+
+flecheDeGauche.addEventListener("click", () => {
+	changerDeSlide("flecheDeGauche")
+})
+
+
+flecheDeDroite.addEventListener("click", () => {
+	changerDeSlide("flecheDeDroite")
+})
+
+
+
+
 
 
 
